@@ -6,9 +6,9 @@ Use this skill when the user asks for the best surf spots in a region based on w
 
 For a user-specified region:
 
-1. Run the Go collector script to gather surf, wind, and tide data per spot.
+1. Run the surfline_region_report.py script to gather surf, wind, and tide data per spot in the specified region.
 2. Score every spot in the region inside the agent (not in Go).
-3. Return the top 3 spots by total score with explanations.
+3. Return the top 3 spots by total score with explanations of their grades.
 
 Category scores are:
 
@@ -20,7 +20,7 @@ Total score is `/30`.
 
 ## Important architecture rule
 
-The Go script is **data collection only**.  
+The Python script is **data collection only**.  
 It must not be treated as a scorer or ranker.
 
 - Script responsibility: fetch and output spot data
@@ -30,11 +30,11 @@ It must not be treated as a scorer or ranker.
 
 Preferred (preset regions):
 
-- `go run surfline_region_report.go -region <region> -hours <hours> -output json`
+- `python3 surfline_region_report.py --region <region> --hours <hours> --output json`
 
 Custom spot IDs:
 
-- `go run surfline_region_report.go -spots "<spotId1,spotId2,...>" -hours <hours> -output json`
+- `python3 surfline_region_report.py --spots "<spotId1,spotId2,...>" --hours <hours> --output json`
 
 Default `hours` to `24` unless the user asks otherwise.
 
@@ -47,7 +47,7 @@ Default `hours` to `24` unless the user asks otherwise.
 
 If the user gives an unsupported region, ask for Surfline spot IDs for that region.
 
-## Parse JSON output from Go script
+## Parse JSON output from the script
 
 Read `spots[]` from script output. Each spot includes:
 
